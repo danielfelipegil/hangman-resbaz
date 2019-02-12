@@ -1,7 +1,9 @@
 welcome: Welcome to Hangman, let the guessing games begin
 
-correct: Correct, the letter {{letter}} exists in the word
+correct: Correct, the letter {{letter}} is in the word. {{attempts}} attempts remain.
+
+incorrect: Sorry, the letter {{letter}} does not exist in the word, try again. {{attempts}} attempts remain.
 
 win: Good job! Hip Hip Hurray
 
-lose: Sorry, that's the wrong answer.
+lose: Sorry, you were not able to guess the word in {{attempts}} attempts. Game ends now.

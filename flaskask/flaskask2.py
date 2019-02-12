@@ -7,9 +7,10 @@ from flask_ask import Ask, statement, question, session
 app = Flask(__name__)
 ask = Ask(app, "/")
 
-gameCounter = 1
+gameCounter = 0
 maxAttempts = 10
-wordPickedFromRep = 'Hello'
+wordPickedFromRep = 'hello'
+
 
 @app.route('/')
 def homepage():
@@ -32,14 +33,19 @@ def next_round():
 
 @ask.intent("AlphabetIntent", convert={'country': str})
 def answer(country):
-    letterSpoken = country[0]
     global gameCounter
     gameCounter = gameCounter + 1
-    if letterSpoken in wordPickedFromRep:
-        return question()
-
-
-    return question(str('Letter selected from the word is ' + country[0]))
+    letterSpoken = country[0]
+    if letterSpoken.lower() in wordPickedFromRep:
+        if gameCounter < maxAttempts:
+            return question(render_template('correct', letter=letterSpoken, attempts=(maxAttempts - gameCounter)))
+        else:
+            return statement(render_template('lose', attempts=maxAttempts))
+    elif letterSpoken.lower() not in wordPickedFromRep:
+        if gameCounter < maxAttempts:
+            return question(render_template('incorrect', letter=letterSpoken, attempts=(maxAttempts - gameCounter)))
+        else:
+            return statement(render_template('lose', attempts=maxAttempts))
 
 
 @ask.session_ended
