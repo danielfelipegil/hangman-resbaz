@@ -1,0 +1,7 @@
+welcome: Welcome to Hangman, let the guessing games begin
+
+correct: Correct, the letter {{letter}} exists in the word
+
+win: Good job! Hip Hip Hurray
+
+lose: Sorry, that's the wrong answer.

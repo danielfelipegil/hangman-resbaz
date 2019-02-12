@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="text-center hidden">
+    <img src="https://brandhub.unimelb.edu.au/guidelines/logos/04_Logo_Vertical-Housed.jpg" height="200" width="200">
+</div>
+<div class="container-fluid">
+    <div class="center-block">
+        <div class="col-sm-12 text-center">
+            <h1 style="font-family:Courier New;" class="text-uppercase">Natural Language Processing</h1>
+            <hr>
+            <h2>HANGMAN</h2>
+            <h5><span class="glyphicon glyphicon-education"></span> Created by Research Platform Services</h5>
+            <br>
+            <div class="alert" style="background-color:rgb(150, 150, 150);color:rgb(256,256,256);">
+                <h5>Guess a letter for the hangman game. You can speak a letter at a time or say the entire word.</h5>
+                <h5><strong>NOTE</strong>: Say <strong>ALEXA</strong> before every input you say</h5>
+                <span id="datetime"></span>
+                <script>
+                    var dt = new Date();
+                    document.getElementById("datetime").innerHTML = dt.toLocaleString();
+                </script>
+            </div>
+            <h1></h1>
+        </div>
+    </div>
+    <div class="col-xs-5 text-center jumbotron" style="background-color:rgb(120, 120, 120);"><h1 style="color:white;">
+        <strong>PLAYER AREA</strong></h1>
+        <br>
+        <br>
+    </div>
+    <div class="col-xs-2 text-center jumbotron" style="background-color:rgb(1,64,133)">
+        <h1 style="color:white;"><strong>Bruh</strong></h1>
+        <br>
+        <br>
+    </div>
+    <div class="col-xs-5 text-center jumbotron" style="background-color:rgb(180, 180, 180);"><h1 style="color:white;">
+        <strong>A.I. LOG</strong></h1>
+        <br>
+        <br>
+    </div>
+</div>
+</div>
+</body>
+</html>
