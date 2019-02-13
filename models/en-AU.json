@@ -9,7 +9,9 @@
                 },
                 {
                     "name": "AMAZON.CancelIntent",
-                    "samples": []
+                    "samples": [
+                        "cancel"
+                    ]
                 },
                 {
                     "name": "AMAZON.HelpIntent",
@@ -30,8 +32,6 @@
                         "ready to play",
                         "ready",
                         "I'm ready",
-                        "alright",
-                        "ok",
                         "play",
                         "start",
                         "go"

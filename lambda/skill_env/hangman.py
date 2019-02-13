@@ -38,8 +38,8 @@ class LaunchRequestHandler(AbstractRequestHandler):
         #table.put_item(Item={'letter': 'x'})
         ###
         
-        #handler_input.response_builder.speak(speech_text).set_should_end_session(False)
-        handler_input.response_builder.speak(speech_text).ask(speech_text)
+        handler_input.response_builder.speak(speech_text).set_should_end_session(False)
+        #handler_input.response_builder.speak(speech_text).ask(speech_text)
         return handler_input.response_builder.response
 
 
@@ -51,11 +51,18 @@ class HangmanIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speech_text = "The word you need to guess has 5 letters and it was taken from one of the books in the Brown collection. You can start guessing the letters by say for example: A for Australia."
+        
+        if 'word' not in handler_input.attributes_manager.session_attributes:
+            word='hello' # get the word from corpus
+            handler_input.attributes_manager.session_attributes['word'] = word
+        
+        word=handler_input.attributes_manager.session_attributes['word']
+        wlen=len(word)
+        speech_text = "The word you need to guess has "+str(wlen) +" letters and it was taken from one of the books in the Brown collection. You can start guessing the letters by say for example: A for Australia."
         
         
         
-        handler_input.response_builder.speak(speech_text).ask(speech_text)
+        handler_input.response_builder.speak(speech_text).ask(speech_text).set_should_end_session(False)
         #handler_input.response_builder.speak(speech_text).set_should_end_session(False)
         #handler_input.response_builder.speak(speech_text)
         return handler_input.response_builder.response
@@ -112,7 +119,7 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         speech_text = "Goodbye!"
-
+        del handler_input.attributes_manager.session_attributes['word']
         
         return handler_input.response_builder.speak(speech_text).response
 
