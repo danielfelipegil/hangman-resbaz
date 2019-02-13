@@ -45,12 +45,13 @@
                     "name": "GuessIntent",
                     "slots": [
                         {
-                            "name": "spell_country_slot",
+                            "name": "country",
                             "type": "AMAZON.Country"
                         }
                     ],
                     "samples": [
-                        "a for {spell_country_slot}"
+                        "{country}",
+                        "a for {country}"
                     ]
                 }
             ],

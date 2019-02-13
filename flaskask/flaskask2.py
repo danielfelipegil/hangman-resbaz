@@ -18,13 +18,20 @@ def homepage():
 
 
 @ask.launch
-def new_game():
+def welcome_game():
     welcome_msg = render_template('welcome')
+    # GET NEW WORD
     return question(welcome_msg)
 
+@ask.intent("HangmanIntent")
+def new_game():
+    word='hello'
+    # GET NEW WORD
+    session.attributes['word']=word
+    return question(word)
 
-@ask.intent("AlphabetIntent", convert={'country': str})
-def answer(country):
+@ask.intent("GuessIntent", convert={'country': str})
+def guess(country):
     global gameCounter
     gameCounter = gameCounter + 1
     letterSpoken = country[0]
@@ -51,3 +58,4 @@ if __name__ == '__main__':
         if verify == 'false':
             app.config['ASK_VERIFY_REQUESTS'] = False
 app.run(debug=True)
+
