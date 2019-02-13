@@ -1,8 +1,12 @@
 import os
+import pickle
+import random
 from random import randint
 
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
+from language_model.model import ngram_guesser
+from game import hangman
 
 app = Flask(__name__)
 ask = Ask(app, "/")
@@ -25,8 +29,9 @@ def welcome_game():
 
 @ask.intent("HangmanIntent")
 def new_game():
-    word='hello'
     # GET NEW WORD
+    words = pickle.load( open( "test_set.pickle", "rb" ) )
+    word=random.choice(words)
     session.attributes['word']=word
     return question(word)
 
@@ -46,6 +51,12 @@ def guess(country):
         else:
             return statement(render_template('lose', attempts=maxAttempts))
 
+@ask.intent("NLTKIntent")
+def nltk_game():
+    attempts=10
+    word=session.attributes['word']
+    nltk_mistakes=hangman(word, ngram_guesser, attempts, True,lambdas=[0.01]*10)
+    return question(nltk_mistakes)
 
 @ask.session_ended
 def session_ended():

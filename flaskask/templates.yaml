@@ -7,3 +7,5 @@ incorrect: Sorry, the letter {{letter}} does not exist in the word, try again. {
 win: Good job! Hip Hip Hurray
 
 lose: Sorry, you were not able to guess the word in {{attempts}} attempts. Game ends now.
+
+attempts: 10
