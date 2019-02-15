@@ -24,13 +24,15 @@ def homepage():
 @ask.launch
 def welcome_game():
     welcome_msg = render_template('welcome')
+    
     # GET NEW WORD
     return question(welcome_msg)
 
 @ask.intent("HangmanIntent")
 def new_game():
     # GET NEW WORD
-    words = pickle.load( open( "test_set.pickle", "rb" ) )
+    
+    words = pickle.load( open( "/Users/danielgil/Documents/Repos/hangman-resbaz/flaskask/language_model/test_set.pickle", "rb" ) )
     word=random.choice(words)
     session.attributes['word']=word
     return question(word)
@@ -51,9 +53,9 @@ def guess(country):
         else:
             return statement(render_template('lose', attempts=maxAttempts))
 
-@ask.intent("NLTKIntent")
-def nltk_game():
-    attempts=10
+@ask.intent("NLTKGuessIntent")
+def nltk_guess():
+    attempts=5
     word=session.attributes['word']
     nltk_mistakes=hangman(word, ngram_guesser, attempts, True,lambdas=[0.01]*10)
     return question(nltk_mistakes)

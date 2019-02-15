@@ -4,7 +4,7 @@ import pickle
 import math
 
 def get_ngram_prob(letter,context,n,lambdas):
-    ngram_counts=pickle.load( open( "ngram_counts.pickle", "rb" ) )
+    ngram_counts=pickle.load( open( "/Users/danielgil/Documents/Repos/hangman-resbaz/flaskask/language_model/ngram_counts.pickle", "rb" ) )
     
     prob=0
     
