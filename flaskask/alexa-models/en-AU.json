@@ -53,6 +53,13 @@
                         "{country}",
                         "a for {country}"
                     ]
+                },
+                {
+                    "name": "NLTKGuessIntent",
+                    "slots": [],
+                    "samples": [
+                        "play python"
+                    ]
                 }
             ],
             "types": []

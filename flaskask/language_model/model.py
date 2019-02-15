@@ -93,7 +93,7 @@ def ngram_guesser(mask, guessed, **kwargs):
         n=kwargs.get('n')
     else:
         n=1
-        
+    print("n=",n)    
     if kwargs.get('lambdas'):       
         lambdas=kwargs.get('lambdas')
     else:

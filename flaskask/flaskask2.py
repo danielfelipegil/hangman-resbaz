@@ -55,7 +55,7 @@ def guess(country):
 
 @ask.intent("NLTKGuessIntent")
 def nltk_guess():
-    attempts=5
+    attempts=2
     word=session.attributes['word']
     nltk_mistakes=hangman(word, ngram_guesser, attempts, True,lambdas=[0.01]*10)
     return question(nltk_mistakes)
