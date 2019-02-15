@@ -3,11 +3,11 @@ from collections import defaultdict
 import pickle
 import math
 
+ngram_counts=pickle.load( open( "/Users/danielgil/Documents/Repos/hangman-resbaz/flaskask/language_model/ngram_counts.pickle", "rb" ) )
+    
 def get_ngram_prob(letter,context,n,lambdas):
-    ngram_counts=pickle.load( open( "/Users/danielgil/Documents/Repos/hangman-resbaz/flaskask/language_model/ngram_counts.pickle", "rb" ) )
     
     prob=0
-    
     # create tuples to make a query with context
     if (n>1):
         if (len(context)>1):
@@ -93,7 +93,6 @@ def ngram_guesser(mask, guessed, **kwargs):
         n=kwargs.get('n')
     else:
         n=1
-    print("n=",n)    
     if kwargs.get('lambdas'):       
         lambdas=kwargs.get('lambdas')
     else:
@@ -109,13 +108,13 @@ def ngram_guesser(mask, guessed, **kwargs):
                 context.insert(0,word[j])
                 j-=1
                 context_len+=1
-            
             for letter in letter_available:
                 probability=get_ngram_prob(letter,context.copy(),n,lambdas.copy())
                 letter_probs[letter]+=probability
+           
                 
-            
     letter_choice=max(letter_probs, key=letter_probs.get)
+
     return letter_choice
 
 def convert_word(word,n):

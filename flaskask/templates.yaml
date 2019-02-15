@@ -1,4 +1,4 @@
-welcome: Welcome to Hangman, let the guessing games begin
+welcome: Welcome to Hangman, let the guessing games begin. Say GO to start.
 
 correct: Correct, the letter {{letter}} is in the word. {{attempts}} attempts remain.
 

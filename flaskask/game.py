@@ -1,5 +1,6 @@
 def hangman(secret_word, guesser, max_mistakes=8, verbose=True, **guesser_args):
     """
+        This game engine is part of material given by The University of Melbourne - Web Search and Text Analysis
         secret_word: a string of lower-case alphabetic characters, i.e., the answer to the game
         guesser: a function which guesses the next character at each stage in the game
             The function takes a:
@@ -18,6 +19,7 @@ def hangman(secret_word, guesser, max_mistakes=8, verbose=True, **guesser_args):
     
     mistakes = 0
     while mistakes < max_mistakes:
+        
         if verbose:
             print("You have", (max_mistakes-mistakes), "attempts remaining.")
         guess = guesser(mask, guessed, **guesser_args)
@@ -44,8 +46,10 @@ def hangman(secret_word, guesser, max_mistakes=8, verbose=True, **guesser_args):
         if '_' not in mask:
             if verbose:
                 print('Congratulations, you won.')
-            return mistakes
+            return mistakes,mask
         
     if verbose:
         print('Out of guesses. The word was', secret_word)    
-    return mistakes
+
+    
+    return mistakes,mask
