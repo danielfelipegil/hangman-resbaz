@@ -1,68 +1,68 @@
 {
-    "interactionModel": {
-        "languageModel": {
-            "invocationName": "hangman at resbaz",
-            "intents": [
-                {
-                    "name": "AMAZON.FallbackIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.CancelIntent",
-                    "samples": [
-                        "cancel"
-                    ]
-                },
-                {
-                    "name": "AMAZON.HelpIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.StopIntent",
-                    "samples": [
-                        "new game",
-                        "cancel",
-                        "stop"
-                    ]
-                },
-                {
-                    "name": "HangmanIntent",
-                    "slots": [],
-                    "samples": [
-                        "ready to play",
-                        "ready",
-                        "I'm ready",
-                        "play",
-                        "start",
-                        "go"
-                    ]
-                },
-                {
-                    "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                },
-                {
-                    "name": "GuessIntent",
-                    "slots": [
-                        {
-                            "name": "country",
-                            "type": "AMAZON.Country"
-                        }
-                    ],
-                    "samples": [
-                        "{country}",
-                        "a for {country}"
-                    ]
-                },
-                {
-                    "name": "NLTKGuessIntent",
-                    "slots": [],
-                    "samples": [
-                        "play python"
-                    ]
-                }
-            ],
-            "types": []
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "hangman at resbaz",
+      "intents": [
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": [
+            "cancel"
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "new game",
+            "cancel",
+            "stop"
+          ]
+        },
+        {
+          "name": "HangmanIntent",
+          "slots": [],
+          "samples": [
+            "ready to play",
+            "ready",
+            "I'm ready",
+            "play",
+            "start",
+            "go"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "GuessIntent",
+          "slots": [
+            {
+              "name": "country",
+              "type": "AMAZON.Country"
+            }
+          ],
+          "samples": [
+            "{country}",
+            "a for {country}"
+          ]
+        },
+        {
+          "name": "NLTKGuessIntent",
+          "slots": [],
+          "samples": [
+            "play python"
+          ]
         }
+      ],
+      "types": []
     }
+  }
 }
