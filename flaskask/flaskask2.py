@@ -1,8 +1,9 @@
+import json
 import os
 import pickle
 import random
-import validation
 
+import validation
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 from game import hangman
@@ -28,6 +29,7 @@ def welcome_game():
     session.attributes['mask'] = ''
     session.attributes['gameCounter'] = 0
     session.attributes['flag'] = 0
+    session.attributes['letterUsed'] = []
 
     return question(render_template('welcome'))
 
@@ -42,6 +44,7 @@ def new_game():
     session.attributes['word'] = word
     session.attributes['mask'] = '_' * len(word)
     session.attributes['gameCounter'] = 0
+    session.attributes['letterUsed'] = []
     session.attributes['flag'] = 1  # Indicates that guessing can begin
 
     # Here we should return the hint about the word, such as the length
@@ -55,18 +58,26 @@ def guess(country):
     wordPickedFromRep = session.attributes['word']
     mask = session.attributes['mask']
     flag = session.attributes['flag']
+    lettersUsed = session.attributes['letterUsed']
 
     if flag:
-        # Check whether word said is a country or not and get the country's first letter
+        # Check whether word said is a country or not
         if country.lower() not in validation.country:
             return question(render_template('wrong_country', country=country))
+
+        # Get the country's first letter and add it to the set of alphabets spoken till now
         letterSpoken = (country[0]).lower()
+        lettersUsed.append(letterSpoken)
+        tempSet = set(lettersUsed)
+        lettersUsed = list(tempSet)
+        session.attributes['letterUsed'] = lettersUsed
 
         # Evaluation logic
         if letterSpoken in wordPickedFromRep:
             if gameCounter < maxAttempts:
                 updatedMask = masking(wordPickedFromRep, mask, letterSpoken)
                 session.attributes['mask'] = updatedMask
+                createJSON_File(updatedMask, lettersUsed, gameCounter)
                 # Win condition
                 if '_' not in session.attributes['mask']:
                     return question(render_template('win', quest=wordPickedFromRep))
@@ -77,6 +88,7 @@ def guess(country):
             # Update game counter for every incorrect choice made
             gameCounter = gameCounter + 1
             session.attributes['gameCounter'] = gameCounter
+            createJSON_File(mask, lettersUsed, gameCounter)
             if gameCounter < maxAttempts:
                 return question(render_template('incorrect', letter=letterSpoken, attempts=(maxAttempts - gameCounter)))
             else:
@@ -116,9 +128,20 @@ def masking(original, masked, letter):
     return newMasked2
 
 
+def createJSON_File(mask, lettersUsed, gameCounter):
+    # JSON Dictionary - Update with details to display
+    js = {}
+    js['maskedWord'] = mask
+    js['alphabetsUsed'] = lettersUsed
+    js['livesRemaining'] = maxAttempts - gameCounter
+    # Dump to file
+    with open('data.json', 'w') as jsonFile:
+        json.dump(js, jsonFile)
+
+
 if __name__ == '__main__':
     if 'ASK_VERIFY_REQUESTS' in os.environ:
         verify = str(os.environ.get('ASK_VERIFY_REQUESTS', '')).lower()
         if verify == 'false':
             app.config['ASK_VERIFY_REQUESTS'] = False
-app.run(debug=True)
+    app.run(debug=True)
