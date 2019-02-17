@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden; overflow-y: auto">
+<head>
+    <title>Hangman @ ResBaz</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+	<script type="text/javascript">
+	function refresh() {
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+		  if (this.readyState == 4 && this.status == 200) {
+			var myObj = JSON.parse(this.responseText);
+			document.getElementById("maskedWord").innerHTML = myObj.maskedWord;
+			document.getElementById("livesRemaining").innerHTML = myObj.livesRemaining;
+			document.getElementById("alphabetsUsed").innerHTML = myObj.alphabetsUsed;
+			document.getElementById("nltkword").innerHTML = "hi";
+			document.getElementById("nltkmistakes").innerHTML = 3;
+		  }
+		};
+		xmlhttp.open("GET", "output.txt", true);
+		xmlhttp.send();
+	}
+
+	function init() {
+	  refresh()
+	  var int = self.setInterval(function () {
+		refresh()
+	  }, 100);
+	}
+	</script>
+	
+	<style>
+		body, html {
+		height: 100%;
+		}
+		
+		* {
+		box-sizing: border-box;
+		}
+		
+		.hero-image {
+		background-image: url(5848152fcef1014c0b5e4967.png), url("P9tVOI0.jpg");
+		height: 25%;
+		background-position: 10% 0%;
+		background-repeat: no-repeat;
+		background-size: 14% 100%, cover;
+		position: relative;
+		}
+
+		.hero-text {
+		text-align: center;
+		position: absolute;
+		top: 50%;
+		left: 52%;
+		transform: translate(-50%, -50%);
+		color: white;
+		}
+		
+		.avatar {
+		vertical-align: middle;
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		}
+		
+		.bg-image {
+		/* The image used */
+		background-image: url("emba-non-english-language.png");
+
+		/* Add the blur effect */
+		filter: blur(8px);
+		-webkit-filter: blur(8px);
+
+		/* Full height */
+		height: 75%; 
+
+		/* Center and scale the image nicely */
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		}
+		
+		.bg-text {
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0, 0.35); /* Black w/opacity/see-through */
+		color: white;
+		font-weight: bold;
+		position: absolute;
+		top: 26.5%;
+		left: 11%;
+		z-index: 2;
+		width: 80%;
+		padding: 25px;
+		}
+		
+	</style>
+	
+</head>
+
+<body onload="init()" style="overflow-x: hidden">
+<div class="hero-image">
+	<div class="hero-text">
+	<h1 style="font-size:50px">Natural Language Analysis With Python NLTK</h1>
+	</div>
+</div>
+<div class="text-center hidden">
+    <img src="https://brandhub.unimelb.edu.au/guidelines/logos/04_Logo_Vertical-Housed.jpg" height="200" width="200">
+</div>
+<div class="bg-image"></div>
+<div>
+	<div class="bg-text text-center">
+		<h1 style="font-family:Courier New;" class="text-uppercase hidden"><b>Natural Language Processing</b></h1>
+		<h2>HANGMAN</h2>
+		<h4><span class="glyphicon glyphicon-education"></span>Created by Research Platform Services</h4>
+		<hr>
+		<div>
+		<h2 style="font-family:Courier New; font-style: italic; text-indent:105pt; text-align: left" class="text-uppercase">
+			<span><img src="researcher-icon-png-4-200x200.png" alt="Avatar" class="avatar"></span> <b>Researcher</b></h2>
+		<h2 style="margin-top:-15px" id="maskedWord"></h2>
+		<h3 style="margin-top: -3px">Remaining lives: <b><i><span style="color:green" id="livesRemaining"></span></i></b></h3>
+		<h3 style="margin-top: -3px">Alphabet used: <i><span id="alphabetsUsed" class="text-uppercase"/></i></h3>
+		</div>
+		<hr>
+		
+		<h2 style="font-family:Courier New; font-style: italic; text-indent:105pt; text-align: left" class="text-uppercase">
+			<span><img src="robot-01-icon.png" alt="Avatar" class="avatar"></span> <b>NLTK AI</b></h2>
+		<h2 style="margin-top:-15px" id="nltkword"></h2>
+		<h3 style="margin-top: -3px">Number of mistakes: <span id="nltkmistakes"></span> off 12 </h3>
+		<hr>
+	</div>
+</div>
+
+</body>
+</html>
