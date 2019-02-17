@@ -137,6 +137,8 @@ def createJSON_File(mask, lettersUsed, gameCounter):
     # JSON Dictionary - Update with details to display
     js = {}
     js['maskedWord'] = (' ').join(mask.upper())
+    if '_' not in mask:
+        js['maskedWord'] = 'GOOD JOB, THE WORD IS: ' + str(mask)
     js['alphabetsUsed'] = [x.upper() for x in lettersUsed]
     js['livesRemaining'] = maxAttempts - gameCounter
     # Dump to file
