@@ -13,7 +13,6 @@ app = Flask(__name__)
 ask = Ask(app, "/")
 
 maxAttempts = 10
-wordPickedFromRep = 'Sample'
 
 
 @app.route('/')
@@ -31,6 +30,9 @@ def welcome_game():
     session.attributes['flag'] = 0
     session.attributes['letterUsed'] = []
 
+    # UI Initialize
+    createJSON_File('', '', 0)
+
     return question(render_template('welcome'))
 
 
@@ -46,6 +48,9 @@ def new_game():
     session.attributes['gameCounter'] = 0
     session.attributes['letterUsed'] = []
     session.attributes['flag'] = 1  # Indicates that guessing can begin
+
+    # UI Fix
+    createJSON_File('_' * len(word), [], 0)
 
     # Here we should return the hint about the word, such as the length
     return question(render_template('length_hint', length=len(word), attempts=maxAttempts))
@@ -99,7 +104,7 @@ def guess(country):
 
 @ask.intent("NLTKGuessIntent")
 def nltk_guess():
-    attempts = 12
+    attempts = maxAttempts
     word = session.attributes['word']
     nltk_mistakes, mask = hangman(word, ngram_guesser, attempts, True, lambdas=[0.01] * 10, n=3)
     return question(str(nltk_mistakes) + ' mistakes! Result: ' + ' '.join(mask))
@@ -131,8 +136,8 @@ def masking(original, masked, letter):
 def createJSON_File(mask, lettersUsed, gameCounter):
     # JSON Dictionary - Update with details to display
     js = {}
-    js['maskedWord'] = mask
-    js['alphabetsUsed'] = lettersUsed
+    js['maskedWord'] = (' ').join(mask.upper())
+    js['alphabetsUsed'] = [x.upper() for x in lettersUsed]
     js['livesRemaining'] = maxAttempts - gameCounter
     # Dump to file
     with open('data.json', 'w') as jsonFile:
