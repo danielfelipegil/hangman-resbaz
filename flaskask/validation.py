@@ -31,7 +31,7 @@ cList = ['Afghanistan', 'Åland Islands', 'Albania', 'Algeria', 'American Samoa'
          'Tonga', 'Trinidad and Tobago', 'Tristan da Cunha', 'Tunisia', 'Turkey', 'Turkmenistan',
          'Turks and Caicos Islands', 'Tuvalu', 'U.S. Outlying Islands', 'U.S. Virgin Islands', 'Uganda', 'Ukraine',
          'United Arab Emirates', 'United Kingdom', 'United Nations', 'United States', 'Uruguay', 'Uzbekistan',
-         'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Wallis and Futuna', 'Western Sahara', 'Yemen', 'Zambia',
+         'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Wallis and Futuna', 'Wales', 'Western Sahara', 'Yemen', 'Zambia',
          'Zimbabwe']
 
 country = set([x.lower() for x in cList])

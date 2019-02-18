@@ -4,7 +4,7 @@ correct: Correct, the letter {{letter}} is in the word. {{attempts}} attempts re
 
 incorrect: Sorry, the letter '{{letter}}' does not exist in the word, try again. {{attempts}} attempts remain.
 
-win: Good job! Hip Hip Hurray. The word was {{quest}} Do you want the NLTK AI to play?
+win: Good job! Hip Hip Hurray. The word was {{quest}}. Do you want the NLTK AI to play?
 
 lose: Sorry, you were not able to guess the word in {{attempts}} attempts. Game ends now.
 

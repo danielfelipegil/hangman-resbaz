@@ -31,7 +31,7 @@ def welcome_game():
     session.attributes['letterUsed'] = []
 
     # UI Initialize
-    createJSON_File('', '', 0)
+    createJSON_File('NEW  GAME', '', 0, '')
 
     return question(render_template('welcome'))
 
@@ -50,7 +50,7 @@ def new_game():
     session.attributes['flag'] = 1  # Indicates that guessing can begin
 
     # UI Fix
-    createJSON_File('_' * len(word), [], 0)
+    createJSON_File('_' * len(word), [], 0, '')
 
     # Here we should return the hint about the word, such as the length
     return question(render_template('length_hint', length=len(word), attempts=maxAttempts))
@@ -82,7 +82,7 @@ def guess(country):
             if gameCounter < maxAttempts:
                 updatedMask = masking(wordPickedFromRep, mask, letterSpoken)
                 session.attributes['mask'] = updatedMask
-                createJSON_File(updatedMask, lettersUsed, gameCounter)
+                createJSON_File(updatedMask, lettersUsed, gameCounter, ' ')
                 # Win condition
                 if '_' not in session.attributes['mask']:
                     return question(render_template('win', quest=wordPickedFromRep))
@@ -93,7 +93,7 @@ def guess(country):
             # Update game counter for every incorrect choice made
             gameCounter = gameCounter + 1
             session.attributes['gameCounter'] = gameCounter
-            createJSON_File(mask, lettersUsed, gameCounter)
+            createJSON_File(mask, lettersUsed, gameCounter, ' ')
             if gameCounter < maxAttempts:
                 return question(render_template('incorrect', letter=letterSpoken, attempts=(maxAttempts - gameCounter)))
             else:
@@ -107,7 +107,30 @@ def nltk_guess():
     attempts = maxAttempts
     word = session.attributes['word']
     nltk_mistakes, mask = hangman(word, ngram_guesser, attempts, True, lambdas=[0.01] * 10, n=3)
-    return question(str(nltk_mistakes) + ' mistakes! Result: ' + ' '.join(mask))
+    createJSON_File(session.attributes['mask'], '', session.attributes['gameCounter'], session.attributes['word'])
+    output = ''
+    if '_' in mask:
+        if '_' in session.attributes['mask']:
+            output = 'The AI was not able to guess the word completely. ' + str(
+                nltk_mistakes) + ' mistakes were made by the NLTK AI! Final guess: ' + ' '.join(
+                mask) + '. This game was a tie'
+        else:
+            output = 'The AI was not able to guess the word completely. ' + str(
+                nltk_mistakes) + ' mistakes were made by the NLTK AI! Final guess: ' + ' '.join(
+                mask) + '. You won, Hip Hip Hurray'
+    else:
+        if '_' in session.attributes['mask']:
+            output = 'The AI was able to guess the word correctly with ' + str(
+                nltk_mistakes) + ' lives remaining. Result: ' + ' '.join(mask) + '. The NLTK AI won this round'
+        else:
+            verdict = None
+            if nltk_mistakes < session.attributes['gameCounter']:
+                verdict = '. The NLTK AI won this round with less number of mistakes'
+            else:
+                verdict = '. You beat the NLTK AI by guessing the word with more lives remaining'
+            output = 'The AI was able to guess the word correctly with ' + str(
+                nltk_mistakes) + ' lives remaining. Result: ' + ' '.join(mask) + verdict
+    return statement(output)
 
 
 @ask.session_ended
@@ -133,14 +156,15 @@ def masking(original, masked, letter):
     return newMasked2
 
 
-def createJSON_File(mask, lettersUsed, gameCounter):
+def createJSON_File(mask, lettersUsed, gameCounter, orgWord):
     # JSON Dictionary - Update with details to display
     js = {}
     js['maskedWord'] = (' ').join(mask.upper())
-    if '_' not in mask:
-        js['maskedWord'] = 'GOOD JOB, THE WORD IS: ' + str(mask)
+    if '_' not in mask and 'NEW  GAME' not in mask:
+        js['maskedWord'] = 'The word guessed: ' + str(mask)
     js['alphabetsUsed'] = [x.upper() for x in lettersUsed]
     js['livesRemaining'] = maxAttempts - gameCounter
+    js['word'] = 'The word selected was:' + orgWord.upper()
     # Dump to file
     with open('data.json', 'w') as jsonFile:
         json.dump(js, jsonFile)

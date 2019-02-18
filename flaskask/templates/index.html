@@ -16,6 +16,7 @@
 			document.getElementById("maskedWord").innerHTML = myObj.maskedWord;
 			document.getElementById("livesRemaining").innerHTML = myObj.livesRemaining;
 			document.getElementById("alphabetsUsed").innerHTML = myObj.alphabetsUsed;
+			document.getElementById("word").innerHTML = myObj.word;
 		  }
 		};
 		xmlhttp.open("GET", "../data.json", true);
@@ -28,6 +29,7 @@
 		refresh()
 	  }, 10);
 	}
+
     </script>
 </head>
 <body onload="init()" style="overflow-x: hidden">
@@ -42,11 +44,13 @@
             <h5><span class="glyphicon glyphicon-education"></span> Created by Research Platform Services</h5>
             <br>
             <div class="alert" style="background-color:rgb(150, 150, 150);color:rgb(256,256,256);">
-                <h5>Guess a letter for the hangman game. You can speak a country name at a time or say like - A for Australia</h5>
+                <h5>Guess a letter for the hangman game. You can speak a country name at a time or say like - A for
+                    Australia</h5>
                 <span id="datetime"></span>
                 <script>
                     var dt = new Date();
                     document.getElementById("datetime").innerHTML = dt.toLocaleString();
+
                 </script>
             </div>
             <h1></h1>
@@ -62,6 +66,9 @@
 <div class="text-center" style="font-family:Courier New;">
     <h3>LIVES REMAINING : <b><span id="livesRemaining"></span></b></h3>
     <h3>ALPHABETS USED : <b><span id="alphabetsUsed"></span></b></h3>
+</div>
+<div class="col-xs-12 text-center jumbotron">
+    <h2><b><span id="word"></span></b></h2>
 </div>
 </body>
 </html>
