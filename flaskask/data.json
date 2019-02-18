@@ -1,1 +1,12 @@
-{"maskedWord": "The word guessed: slumber", "alphabetsUsed": [], "livesRemaining": 2, "word": "The AI was able to guess the word correctly with 8 lives remaining. Result: s l u m b e r. You beat the NLTK AI by guessing the word with more lives remaining"}
+{
+  "maskedWord": "_ _ _ _ N _ _ _",
+  "alphabetsUsed": [
+    "B",
+    "A",
+    "N"
+  ],
+  "livesRemaining": 8,
+  "word": " ",
+  "mis": " ",
+  "result": ""
+}
