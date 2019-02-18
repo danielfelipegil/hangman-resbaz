@@ -107,7 +107,7 @@ def nltk_guess():
     attempts = maxAttempts
     word = session.attributes['word']
     nltk_mistakes, mask = hangman(word, ngram_guesser, attempts, True, lambdas=[0.01] * 10, n=3)
-    createJSON_File(session.attributes['mask'], '', session.attributes['gameCounter'], session.attributes['word'])
+    nltk_mistakes = maxAttempts - nltk_mistakes
     output = ''
     if '_' in mask:
         if '_' in session.attributes['mask']:
@@ -130,6 +130,7 @@ def nltk_guess():
                 verdict = '. You beat the NLTK AI by guessing the word with more lives remaining'
             output = 'The AI was able to guess the word correctly with ' + str(
                 nltk_mistakes) + ' lives remaining. Result: ' + ' '.join(mask) + verdict
+    createJSON_File(session.attributes['mask'], '', session.attributes['gameCounter'], output)
     return statement(output)
 
 
@@ -164,7 +165,7 @@ def createJSON_File(mask, lettersUsed, gameCounter, orgWord):
         js['maskedWord'] = 'The word guessed: ' + str(mask)
     js['alphabetsUsed'] = [x.upper() for x in lettersUsed]
     js['livesRemaining'] = maxAttempts - gameCounter
-    js['word'] = 'The word selected was:' + orgWord.upper()
+    js['word'] = orgWord
     # Dump to file
     with open('data.json', 'w') as jsonFile:
         json.dump(js, jsonFile)

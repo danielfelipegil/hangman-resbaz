@@ -10,7 +10,7 @@ lose: Sorry, you were not able to guess the word in {{attempts}} attempts. Game 
 
 attempts: 10
 
-length_hint: The word is of {{length}} letters from the Guttenberg repository, start guessing. You have a total of {{attempts}} wrong attempts. You can start by saying 'A' for Australia
+length_hint: The word is of {{length}} letters from the Brown repository, start guessing. You have {{attempts}} lives to start with. Start by saying something like 'A' for Australia or just the name of the country
 
 wrong_country: Sorry, {{country}} is not the name of a country, please retry
 

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bs.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -30,6 +31,9 @@
 	  }, 10);
 	}
 
+
+
+
     </script>
 </head>
 <body onload="init()" style="overflow-x: hidden">
@@ -39,36 +43,29 @@
 <div class="container-fluid">
     <div class="center-block">
         <div class="col-sm-12 text-center">
-            <h1 style="font-family:Courier New;" class="text-uppercase">Natural Language Analysis With Python NLTK</h1>
+            <h1 style="font-family:Courier New;" class="text-uppercase">Natural Language Analysis With NLTK</h1>
             <h2>HANGMAN</h2>
             <h5><span class="glyphicon glyphicon-education"></span> Created by Research Platform Services</h5>
             <br>
-            <div class="alert" style="background-color:rgb(150, 150, 150);color:rgb(256,256,256);">
-                <h5>Guess a letter for the hangman game. You can speak a country name at a time or say like - A for
-                    Australia</h5>
-                <span id="datetime"></span>
-                <script>
-                    var dt = new Date();
-                    document.getElementById("datetime").innerHTML = dt.toLocaleString();
-
-                </script>
+            <div class="alert" style="background-color:rgb(100, 100, 100);color:rgb(256,256,256);">
+                <h5>The word chosen is from the</h5>
+                <a href="https://en.wikipedia.org/wiki/Brown_Corpus"><h2><b style="color:orange;">BROWN CORPUS</b></h2>
+                </a>
+                <h5>You can speak the name of a country or city to start guessing</h5>
             </div>
             <h1></h1>
         </div>
     </div>
     <div class="col-xs-12 text-center jumbotron" style="background-color:rgb(10, 100, 200);">
-        <br>
-        <h1><span id="maskedWord" style="color:white; font-size: 200%;"></span></h1>
-        <br>
-        <br>
+        <h1><span id="maskedWord" style="color:white; font-size: 150%;"></span></h1>
     </div>
 </div>
 <div class="text-center" style="font-family:Courier New;">
     <h3>LIVES REMAINING : <b><span id="livesRemaining"></span></b></h3>
     <h3>ALPHABETS USED : <b><span id="alphabetsUsed"></span></b></h3>
 </div>
-<div class="col-xs-12 text-center jumbotron">
-    <h2><b><span id="word"></span></b></h2>
+<div class="col-xs-12 text-center" style="background-color:grey;">
+    <h2><b><h3 style="color:white;" id="word"></h3></b></h2>
 </div>
 </body>
 </html>
