@@ -1,12 +1,1 @@
-{
-  "maskedWord": "_ _ _ _ N _ _ _",
-  "alphabetsUsed": [
-    "B",
-    "A",
-    "N"
-  ],
-  "livesRemaining": 8,
-  "word": " ",
-  "mis": " ",
-  "result": ""
-}
+{"maskedWord": "The word guessed: occupies", "alphabetsUsed": [], "livesRemaining": 8, "word": "occupies", "aiLivesRemaining": 4, "outcome": "You win"}

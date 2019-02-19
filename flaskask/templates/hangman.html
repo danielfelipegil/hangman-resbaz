@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden; overflow-y: auto">
+<head>
+    <title>Hangman @ ResBaz</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+	<script type="text/javascript">
+	function refresh() {
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+		  if (this.readyState == 4 && this.status == 200) {
+			var myObj = JSON.parse(this.responseText);
+			document.getElementById("maskedWord").innerHTML = myObj.maskedWord;
+			document.getElementById("livesRemaining").innerHTML = myObj.livesRemaining;
+			document.getElementById("alphabetsUsed").innerHTML = myObj.alphabetsUsed;
+			document.getElementById("word").innerHTML = myObj.word;
+			document.getElementById("mis").innerHTML = myObj.aiLivesRemaining;
+			document.getElementById("result").innerHTML = myObj.outcome;
+		  }
+		};
+		xmlhttp.open("GET", "../data.json", true);
+		xmlhttp.send();
+	}
+
+	function init() {
+	  refresh()
+	  var int = self.setInterval(function () {
+		refresh()
+	  }, 100);
+	}
+	</script>
+
+	<style>
+		body, html {
+		height: 100%;
+		}
+
+		* {
+		box-sizing: border-box;
+		}
+
+		.avatar {
+		vertical-align: middle;
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		}
+
+		.bg-image {
+		/* The image used */
+		background-image: url("./images/Natural-Language-Processing-Definition-1.jpg");
+
+		/* Add the blur effect */
+		filter: blur(5px);
+		-webkit-filter: blur(5px);
+
+		/* Full height */
+		height: 100%;
+
+		/* Center and scale the image nicely */
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		}
+
+		.bg-text {
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0, 0.7); /* Black w/opacity/see-through */
+		color: white;
+		font-weight: bold;
+		position: absolute;
+		top: 5%;
+		left: 8%;
+		z-index: 2;
+		width: 85%;
+		height: 90%;
+		padding: 25px;
+		}
+
+		.typewriter{
+		color: #fff;
+		overflow: hidden; /* Ensures the content is not revealed until the animation */
+		border-right: .1em solid orange; /* The typwriter cursor */
+		white-space: nowrap; /* Keeps the content on a single line */
+		margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+		letter-spacing: .20em; /* Adjust as needed */
+		animation:
+		typing 1.5s steps(40, end),
+		blink-caret .4s step-end infinite;
+		}
+
+		/* The typing effect */
+		@keyframes typing {
+		from { width: 0 }
+		to { width: 100% }
+		}
+
+		/* The typewriter cursor effect */
+		@keyframes blink-caret {
+		from, to { border-color: transparent }
+		50% { border-color: orange }
+		}
+
+		#container {
+		display: flex;
+		}
+		#center {
+		margin: auto;
+		}
+
+		.colorchange{
+		-webkit-animation:colorchange 1s infinite alternate;
+		}
+
+		@-webkit-keyframes colorchange {
+		0% {
+		color: blue;
+		}
+
+		20% {
+
+		color: red;
+		}
+
+		40% {
+
+		color: green;
+		}
+
+		60% {
+
+		color: cyan;
+		}
+
+		80% {
+
+		color: yellow;
+		}
+		}
+
+	</style>
+
+</head>
+
+<body onload="init()">
+<div class="hero-image hidden">
+	<div class="hero-text hidden">
+	<h1 style="font-size:50px">Natural Language Analysis With Python NLTK</h1>
+	</div>
+</div>
+<div class="bg-image"></div>
+<div>
+	<div class="bg-text text-center">
+		<h1 style="font-family:Courier New;" class="text-uppercase hidden"><b>Natural Language Processing</b></h1>
+		<h2 style="margin-top:-2px"><u><i>HANGMAN @ RezBaz</i></u></h2>
+		<hr>
+		<div>
+		<h2 style="font-family:Courier New; font-style: italic; text-indent:105pt; text-align: left" class="text-uppercase">
+			<span><img src="./images/images.jpg" alt="Avatar" class="avatar"></span> <b>Researcher</b></h2>
+		<h1 style="margin-top:-15px; font-size:95px" id="maskedWord"></h1>
+		<h3 style="margin-top: -3px">Remaining Attempts: <b><i><span id="livesRemaining"></span></i></b></h3>
+		<h3 style="margin-top: -3px">Alphabet used: <i><span id="alphabetsUsed" class="text-uppercase"/></i></h3>
+		</div>
+		<hr>
+
+		<h2 style="font-family:Courier New; font-style: italic; text-indent:105pt; text-align: left" class="text-uppercase">
+			<span><img src="./images/new.jpg" alt="Avatar" class="avatar"></span> <b>NLTK AI</b></h2>
+			<div id="container">
+				<div id="center">
+					<h1 style="margin-top:-15px; font-size:95px" class="typewriter" id="word"></h1>
+				</div>
+			</div>
+		<h3 style="margin-top: +10px">Number of Mistakes: <span id="mis"></span></h3>
+		<hr>
+		<div class="colorchange">
+			<h1 style="margin-top: -15px; margin-bottom: -2px; font-size:95px" id="result"></h1>
+		</div>
+	</div>
+</div>
+</body>
+</html>

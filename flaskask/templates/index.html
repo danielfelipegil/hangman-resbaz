@@ -30,6 +30,7 @@
 		refresh()
 	  }, 10);
 	}
+
     </script>
 </head>
 <body onload="init()" style="overflow-x: hidden">
@@ -41,11 +42,9 @@
         <div class="col-sm-12 text-center">
             <h1 style="font-family:Courier New;" class="text-uppercase">Natural Language Analysis With NLTK</h1>
             <h2>HANGMAN</h2>
-            <h5><span class="glyphicon glyphicon-education"></span> Created by Research Platform Services</h5>
-            <br>
             <div class="alert" style="background-color:rgb(100, 100, 100);color:rgb(256,256,256);">
                 <h5>The word chosen is from the</h5>
-                <a href="https://en.wikipedia.org/wiki/Brown_Corpus"><h2><b style="color:orange;">BROWN CORPUS</b></h2>
+                <a href="https://en.wikipedia.org/wiki/Brown_Corpus"><h4><b style="color:orange;">BROWN CORPUS</b></h4>
                 </a>
                 <h5>You can speak the name of a country or city to start guessing</h5>
             </div>
@@ -53,12 +52,12 @@
         </div>
     </div>
     <div class="col-xs-12 text-center jumbotron" style="background-color:rgb(10, 100, 200);">
-        <h1><span id="maskedWord" style="color:white; font-size: 150%;"></span></h1>
+        <h1><span id="maskedWord" style="color:white; font-size: 200%;"></span></h1>
     </div>
 </div>
 <div class="text-center" style="font-family:Courier New;">
-    <h3>LIVES REMAINING : <b><span id="livesRemaining"></span></b></h3>
-    <h3>ALPHABETS USED : <b><span id="alphabetsUsed"></span></b></h3>
+    <h3>LIVES REMAINING : <b><span id="livesRemaining"></span></b> | ALPHABETS USED : <b><span
+            id="alphabetsUsed"></span></b></h3>
 </div>
 <div class="col-xs-12 text-center" style="background-color:grey;">
     <h2><b><h3 style="color:white;" id="word"></h3></b></h2>
